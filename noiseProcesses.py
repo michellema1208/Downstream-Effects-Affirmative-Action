@@ -1,14 +1,11 @@
-from random import *
-"""
-TODO:
-1. For init, find Numpy function that will set random seed
-"""
+import numpy as np
+from numpy import random
 
 class NoiseProcesses:
     """ comment here """
 
     def __init__(self, seed):
-        self.seed = seed
+        self.seed = np.random.seed(seed=seed)
 
     def addNoise(value, low, high):
-        return randrange(value-low, value+high)
+        return np.random.randint(value-low, value+high+1)
