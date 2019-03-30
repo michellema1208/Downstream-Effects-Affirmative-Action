@@ -18,14 +18,15 @@ TODO:
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pdb
 
 class Posterior:
 
     """
     Parameters: prior is a distribution object, conditionalProbs is a list
     """
-    def __init__(self, prior, threshold):
-        self.prior = prior
+    def __init__(self, threshold):
+        #self.prior = prior
         self.threshold = threshold
         #self.conditionalProbs = conditionalProbs
 
@@ -37,54 +38,28 @@ class Posterior:
 
     [(x, f(x)) for x in myList] where myList = [x_1, x_2, ...]
     """
-    def askPosterior(typeAndScores):
-        maxIndex = 0
-        sorted_list = sorted(typeAndScores, key=lambda x: x[1])
-        for i in range(len(sorted_list)):
-            if sorted_list[i].second >= self.threshold:
-                maxIndex = i
-                break
+    def askPosterior(self, type_and_scores):
+        filtered_type_and_scores = filter(lambda x: x[1] > self.threshold, type_and_scores)
 
-        final_list = typesAndScores[maxIndex:]
-        type_list = []
-        for i in range(len(final_list)):
-            type_list.append(final_list[i].first)
-
-        return type_list
-
-    """
-    Parameters: takes in a list of the true types accepted by the college
-    Returns: a hashtable with key = type, value = percentage of people who have those types
-    """
-    def trueTypePercentages(type_list):
-
-        type_map = {}
-        total_people = len(type_list)
-        for type in type_list:
-            if !type_map[type]:   #TODO: fix this syntax
-                type_map[type] = 0
-            type_map[type] += 1
-
-        for type in type_map:
-            type_map[type] = float(type_map[type])/total_people
-
-        return type_map
-
-    def trueType(type_list):
-
-        for i in range(len(type_list)):
-            type_list[i] = float(type_list[i])/len(type_list)
-
-        return type_list
+        return sorted(filtered_type_and_scores, key=lambda x: x[0])
 
     """
     Parameters: a hashtable with key = type, value = percentage of people who have those types
     Returns:
     """
-    def plotting(type_list):
+    def plotting(self, type_list, old_list):
 
-        hist, bins = np.histogram(type_list, bins=range(type_list[0], type_list[len(type_list)-1]))
+        # for type_list
+        hist, bins = np.histogram(type_list)
         width = 0.7 * (bins[1] - bins[0])
-        center = (bins[:-1] + bins[1:]) / 2
-        plt.bar(center, hist, align='center', width=width)
+        #center = (bins[:-1] + bins[1:]) / 2
+        numBins = (type_list[len(type_list)-1] - type_list[0]) + 1
+
+        # for old_list
+        hist2, bins2 = np.histogram(old_list)
+        #center = (bins[:-1] + bins[1:]) / 2
+        numBins2 = (old_list[len(old_list)-1] - old_list[0]) + 1
+
+        plt.hist(type_list, bins=numBins, alpha = .5, label="x") #align='center', width=width
+        plt.hist(old_list, bins=numBins, alpha = .5, label="y")
         plt.show()

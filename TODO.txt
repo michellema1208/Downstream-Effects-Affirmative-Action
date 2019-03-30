@@ -1,0 +1,11 @@
+TODO:
+All done! 
+
+DONE:
+1. Have a simulation.py that has all the testing code
+5. Truncate the scores below 0 and above 100 (right now we have scores that
+are above 100)
+4. Have a more interesting dataset (see line 24) --> Scipy has get samples from
+a binomial distribution
+3. Histogram of all the scores before the threshold (we have the histogram of
+all the scores AFTER the threshold currently)
