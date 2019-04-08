@@ -11,9 +11,20 @@ class NoiseProcesses:
         self.min = 0
         self.max = 100
 
-    def addNoise(self, value, low, high):
+    def addUniformNoise(self, value, low, high):
 
         rand = np.random.randint(value-low, value+high+1)
+
+
+        if (rand < self.min):
+            return self.min
+        elif (rand > self.max):
+            return self.max
+
+        return rand
+
+    def addBinomialNoise(self, value, p, trials):
+        rand = value + (2 * np.random.binomial(trials, p, 1) - trials)
 
         if (rand < self.min):
             return self.min

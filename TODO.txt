@@ -17,11 +17,10 @@ DONE2:
 TODO:
 3. Grades - output of a function of their true type (apply another noise process)
   3D plot - or assume that the employer has a threshold for grades having gotten into school
+1. Expected true type of admitted people
 
 
 Discussion:
 1. Presentation next Friday?
-2. Todo task 5: not sure how to do this in a function since the probability distributions all take in such different arguments; are we supposed to
-   just round true types generated outside the range? Wouldn't this still result in clumping; should we take out the people outside the range from the data?
 3. Todo task 1: we made the step 2 so we could read it
 4:  Todo task 4: different parameters for min and max when truncating true types?
