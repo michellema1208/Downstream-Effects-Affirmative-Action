@@ -1,11 +1,27 @@
-TODO:
-All done! 
-
 DONE:
 1. Have a simulation.py that has all the testing code
 5. Truncate the scores below 0 and above 100 (right now we have scores that
-are above 100)
+are above 100) in noise process
 4. Have a more interesting dataset (see line 24) --> Scipy has get samples from
 a binomial distribution
 3. Histogram of all the scores before the threshold (we have the histogram of
 all the scores AFTER the threshold currently)
+
+DONE2:
+5. Truncate true types (not just after noise process)
+2. Show line for threshold
+1. Fix histogram (look at API examples) - more tic marks on x-axis
+4. Majority vs minority groups - two different data generations (different parameters - original type distribution)
+
+
+TODO:
+3. Grades - output of a function of their true type (apply another noise process)
+  3D plot - or assume that the employer has a threshold for grades having gotten into school
+
+
+Discussion:
+1. Presentation next Friday?
+2. Todo task 5: not sure how to do this in a function since the probability distributions all take in such different arguments; are we supposed to
+   just round true types generated outside the range? Wouldn't this still result in clumping; should we take out the people outside the range from the data?
+3. Todo task 1: we made the step 2 so we could read it
+4:  Todo task 4: different parameters for min and max when truncating true types?

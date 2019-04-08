@@ -6,13 +6,34 @@ from posterior import *
 from noiseProcesses import *
 import numpy as np
 
+
+#def generateTrueTypes(num_people, low, hi, probabilityDistributionFunction):
+    #true_types = probabilityDistributionFunction()
+
+def truncateTrueTypes(list, min, max):
+    truncated_true_types = []
+    for i in range(len(list)):
+        if (list[i] < min):
+            truncated_true_types.append(min)
+        elif (list[i] > max):
+            truncated_true_types.append(max)
+        else:
+            truncated_true_types.append(list[i])
+
+    return truncated_true_types
+
 def main():
 
     # from NoiseProcesses
     # my_types = list(range(0, 100))
-    my_types = np.random.binomial(100, .5, 100) #
+    #my_types = np.random.binomial(100, .5, 10000) #
+    #my_types = np.random.randint(0, 100, 10000)
+    my_types = np.random.normal(50, 30, 10000)
+    #TODO truncate true types
+    my_types = [int(x) for x in my_types]
+    my_types = truncateTrueTypes(my_types, 0, 100)
     myNoiseProcess = NoiseProcesses(2)
-    types_and_scores = [(x, myNoiseProcess.addNoise(x, 5, 5)) for x in my_types]
+    types_and_scores = [(x, myNoiseProcess.addNoise(x, 5, 20)) for x in my_types]
     #print(types_and_scores)
     myPosterior = posterior.Posterior(50)
     new_list = myPosterior.askPosterior(types_and_scores)

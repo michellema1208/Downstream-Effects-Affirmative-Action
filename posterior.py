@@ -60,6 +60,8 @@ class Posterior:
         #center = (bins[:-1] + bins[1:]) / 2
         numBins2 = (old_list[len(old_list)-1] - old_list[0]) + 1
 
-        plt.hist(type_list, bins=numBins, alpha = .5, label="x") #align='center', width=width
-        plt.hist(old_list, bins=numBins, alpha = .5, label="y")
+        plt.hist(type_list, bins=range(1, 101), alpha = .5, label="x") #align='center', width=width
+        plt.hist(old_list, bins=range(1, 101), alpha = .5, label="y")
+        plt.xticks(np.arange(0, 101, 2.0))
+        plt.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
         plt.show()
