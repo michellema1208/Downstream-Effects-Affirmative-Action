@@ -64,4 +64,38 @@ class Posterior:
         plt.hist(old_list, bins=range(1, 101), alpha = .5, label="y")
         plt.xticks(np.arange(0, 101, 2.0))
         plt.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        plt.xlabel('True Types')
+        plt.ylabel('Number of Applicants')
+        plt.show()
+
+
+    def plotTwoPopulationsAcceptedTrueTypes(self, accepted_types_1, accepted_types_2):
+        fig,axes = plt.subplots(nrows = 1, ncols = 2)
+        ax1, ax2 = axes.flatten()
+        ax1.hist(accepted_types_1, bins=range(1, 101))
+        ax1.set_title('population 1')
+        ax2.hist(accepted_types_2, bins=range(1, 101))
+        ax2.set_title('population 2')
+        #ax1.xticks(np.arange(0, 101, 2.0))
+        ax1.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        plt.xticks(np.arange(0, 101, 2.0))
+        ax2.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        plt.show()
+
+
+    def plotTwoPopulations(self, accepted_types_1, accepted_types_2, original_true_types, original_true_types_2):
+        fig,axes = plt.subplots(nrows = 1, ncols = 2)
+        ax1, ax2 = axes.flatten()
+        ax1.hist(accepted_types_1, bins=range(1, 101), alpha = .5)
+        ax1.hist(original_true_types, bins=range(1, 101), alpha = .5)
+        ax1.set_title('population 1')
+        ax2.hist(accepted_types_2, bins=range(1, 101), alpha = .5)
+        ax2.hist(original_true_types_2, bins=range(1, 101), alpha = .5)
+        ax2.set_title('population 2')
+
+        ax1.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        #ax2.xticks(np.arange(0, 101, 2.0))
+        ax2.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        ax1.set_xticks(np.arange(0, 101, 5.0))
+        ax2.set_xticks(np.arange(0, 101, 5.0))
         plt.show()

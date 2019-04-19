@@ -23,33 +23,56 @@ def truncateTrueTypes(list, min, max):
 
     return truncated_true_types
 
+
+
+
 def main():
 
     # from NoiseProcesses
     # my_types = list(range(0, 100))
-    #my_types = np.random.binomial(100, .5, 10000) #
-    #my_types = np.random.randint(0, 100, 10000)
-    my_types = np.random.normal(50, 30, 100000)
+    #original_true_types = np.random.binomial(100, .5, 10000) #
+    #original_true_types = np.random.randint(0, 100, 10000)
+    original_true_types = np.random.normal(50, 30, 100000)
     #TODO truncate true types
-    my_types = [int(x) for x in my_types]
-    my_types = truncateTrueTypes(my_types, 0, 100)
+    original_true_types = [int(x) for x in original_true_types]
+    original_true_types = truncateTrueTypes(original_true_types, 0, 100)
     myNoiseProcess = NoiseProcesses(2)
-    types_and_scores = [(x, myNoiseProcess.addUniformNoise(x, 10, 10)) for x in my_types]
-    #types_and_scores = [(x, myNoiseProcess.addBinomialNoise(x, .8, 10)) for x in my_types]
+    true_types_and_noisy_scores = [(x, myNoiseProcess.addUniformNoise(x, 3, 15)) for x in original_true_types]
+    #true_types_and_noisy_scores = [(x, myNoiseProcess.addBinomialNoise(x, .8, 10)) for x in original_true_types]
     #print(types_and_scores)
     myPosterior = posterior.Posterior(50)
-    new_list = myPosterior.askPosterior(types_and_scores)
+    accepted_types_and_score = myPosterior.askPosterior(true_types_and_noisy_scores)
     #print(new_list)
-    type_list = [x[0] for x in new_list]
-    #myPosterior.plotting(type_list, my_types)
+    accepted_types = [x[0] for x in accepted_types_and_score]
+
+    #POPULATION 2
+
+    original_true_types_2 = np.random.normal(50, 30, 100000)
+    #TODO truncate true types
+    original_true_types_2 = [int(x) for x in original_true_types_2]
+    original_true_types_2 = truncateTrueTypes(original_true_types_2, 0, 100)
+    myNoiseProcess_2 = NoiseProcesses(2)
+    true_types_and_noisy_scores_2 = [(x, myNoiseProcess_2.addUniformNoise(x, 15, 2)) for x in original_true_types_2]
+    #true_types_and_noisy_scores = [(x, myNoiseProcess.addBinomialNoise(x, .8, 10)) for x in original_true_types]
+    #print(types_and_scores)
+    myPosterior_2 = posterior.Posterior(50)
+    accepted_types_and_score_2 = myPosterior_2.askPosterior(true_types_and_noisy_scores_2)
+    #print(new_list)
+    accepted_types_2 = [x[0] for x in accepted_types_and_score_2]
+
+    myPosterior.plotTwoPopulations(accepted_types, accepted_types_2, original_true_types, original_true_types_2)
+
+
+
+    #myPosterior.plotting(accepted_types, original_true_types)
     #val = myNoiseProcess.addNoise(20, 10, 10)
     #print(val)
 
     #Grades
-    gradesNoiseProcess = NoiseProcesses(2)
-    types_after_grades =  [(x, gradesNoiseProcess.addBinomialNoise(x, .8, 10)) for x in type_list]
-    grades_list = [x[0] for x in types_after_grades]
-    myPosterior.plotting(type_list, grades_list)
+    #gradesNoiseProcess = NoiseProcesses(2)
+    #types_after_grades =  [(x, gradesNoiseProcess.addBinomialNoise(x, .8, 10)) for x in type_list]
+    #grades_list = [x[0] for x in types_after_grades]
+    #myPosterior.plotting(type_list, grades_list)
 
     # from Posterior
     type_list = [1, 2, 3, 4, 5]
