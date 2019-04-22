@@ -24,3 +24,13 @@ Discussion:
 1. Presentation next Friday?
 3. Todo task 1: we made the step 2 so we could read it
 4:  Todo task 4: different parameters for min and max when truncating true types?
+
+
+As a function of noise parameters, a1, b1, a2, b2, what is the threshold that should be set to equalize false positive
+and false negative rates?
+For zero noise population, take every individual, toss coin with probability p, head --> randomly admit/reject, tails -> threshold
+
+false positive = fraction of people of true type below threshold admitted/ fraction of people below threshold (true types)
+false negative = fraction of people true type above threshold rejected / fraction of people above threshold (true types)
+denominators are half b/c threshold is currently 50
+calculate as a function of thresholds

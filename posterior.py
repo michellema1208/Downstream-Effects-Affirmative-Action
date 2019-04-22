@@ -25,9 +25,10 @@ class Posterior:
     """
     Parameters: prior is a distribution object, conditionalProbs is a list
     """
-    def __init__(self, threshold):
+    def __init__(self, threshold, threshold_2):
         #self.prior = prior
         self.threshold = threshold
+        self.threshold_2 = threshold_2
         #self.conditionalProbs = conditionalProbs
 
     """
@@ -79,7 +80,7 @@ class Posterior:
         #ax1.xticks(np.arange(0, 101, 2.0))
         ax1.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
         plt.xticks(np.arange(0, 101, 2.0))
-        ax2.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        ax2.axvline(self.threshold_2, color='k', linestyle='solid', linewidth=1)
         plt.show()
 
 
@@ -93,9 +94,11 @@ class Posterior:
         ax2.hist(original_true_types_2, bins=range(1, 101), alpha = .5)
         ax2.set_title('population 2')
 
+        ax1.axvline(50,color='k', linestyle='dotted', linewidth=1)
+        ax2.axvline(50,color='k', linestyle='dotted', linewidth=1)
         ax1.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
         #ax2.xticks(np.arange(0, 101, 2.0))
-        ax2.axvline(self.threshold, color='k', linestyle='solid', linewidth=1)
+        ax2.axvline(self.threshold_2, color='k', linestyle='solid', linewidth=1)
         ax1.set_xticks(np.arange(0, 101, 5.0))
         ax2.set_xticks(np.arange(0, 101, 5.0))
         plt.show()

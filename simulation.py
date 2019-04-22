@@ -32,22 +32,22 @@ def main():
     # my_types = list(range(0, 100))
     #original_true_types = np.random.binomial(100, .5, 10000) #
     #original_true_types = np.random.randint(0, 100, 10000)
-    original_true_types = np.random.normal(50, 30, 100000)
+    original_true_types = np.random.normal(50, 30, 500000)
     #TODO truncate true types
     original_true_types = [int(x) for x in original_true_types]
     original_true_types = truncateTrueTypes(original_true_types, 0, 100)
     myNoiseProcess = NoiseProcesses(2)
-    true_types_and_noisy_scores = [(x, myNoiseProcess.addUniformNoise(x, 3, 15)) for x in original_true_types]
+    true_types_and_noisy_scores = [(x, myNoiseProcess.addUniformNoise(x, 2, 15)) for x in original_true_types]
     #true_types_and_noisy_scores = [(x, myNoiseProcess.addBinomialNoise(x, .8, 10)) for x in original_true_types]
     #print(types_and_scores)
-    myPosterior = posterior.Posterior(50)
+    myPosterior = posterior.Posterior(58.5, 41.5)
     accepted_types_and_score = myPosterior.askPosterior(true_types_and_noisy_scores)
     #print(new_list)
     accepted_types = [x[0] for x in accepted_types_and_score]
 
     #POPULATION 2
 
-    original_true_types_2 = np.random.normal(50, 30, 100000)
+    original_true_types_2 = np.random.normal(50, 30, 500000)
     #TODO truncate true types
     original_true_types_2 = [int(x) for x in original_true_types_2]
     original_true_types_2 = truncateTrueTypes(original_true_types_2, 0, 100)
@@ -55,7 +55,7 @@ def main():
     true_types_and_noisy_scores_2 = [(x, myNoiseProcess_2.addUniformNoise(x, 15, 2)) for x in original_true_types_2]
     #true_types_and_noisy_scores = [(x, myNoiseProcess.addBinomialNoise(x, .8, 10)) for x in original_true_types]
     #print(types_and_scores)
-    myPosterior_2 = posterior.Posterior(50)
+    myPosterior_2 = posterior.Posterior(41.5, 58.5)
     accepted_types_and_score_2 = myPosterior_2.askPosterior(true_types_and_noisy_scores_2)
     #print(new_list)
     accepted_types_2 = [x[0] for x in accepted_types_and_score_2]
